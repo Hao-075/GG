@@ -7,7 +7,7 @@ struct Node {
     Node *next;
 };
 
-// T?o node
+// ===== TẠO NODE =====
 Node* makeNode(string ma, float d){
     Node* newNode = new Node();
     newNode->maHS = ma;
@@ -16,16 +16,16 @@ Node* makeNode(string ma, float d){
     return newNode;
 }
 
-// ================= TH�M =================
+// ===== THÊM =====
 
-// Th�m d?u
+// Thêm đầu (DÙNG CHÍNH)
 void pushFront(Node *&head, string ma, float d){
     Node *newNode = makeNode(ma, d);
     newNode->next = head;
     head = newNode;
 }
 
-// Th�m cu?i
+// Thêm cuối
 void pushBack(Node *&head, string ma, float d){
     Node *newNode = makeNode(ma, d);
     if(head == NULL){
@@ -39,7 +39,7 @@ void pushBack(Node *&head, string ma, float d){
     temp->next = newNode;
 }
 
-// Th�m gi?a (v? tr� k)
+// Thêm giữa (vị trí k)
 void insert(Node *&head, int k, string ma, float d){
     int n = 0;
     Node *tmp = head;
@@ -65,9 +65,9 @@ void insert(Node *&head, int k, string ma, float d){
     temp->next = newNode;
 }
 
-// ================= X�A =================
+// ===== XÓA =====
 
-// X�a d?u
+// Xóa đầu
 void popFront(Node *&head){
     if(head == NULL) return;
     Node *temp = head;
@@ -75,7 +75,7 @@ void popFront(Node *&head){
     delete temp;
 }
 
-// X�a cu?i
+// Xóa cuối
 void popBack(Node *&head){
     if(head == NULL) return;
 
@@ -95,7 +95,7 @@ void popBack(Node *&head){
     delete last;
 }
 
-// X�a gi?a (v? tr� k)
+// Xóa giữa (vị trí k)
 void erase(Node *&head, int k){
     if(head == NULL) return;
 
@@ -123,7 +123,7 @@ void erase(Node *&head, int k){
     delete del;
 }
 
-// X�a theo m� HS
+// Xóa theo mã HS (đề yêu cầu)
 void deleteByMa(Node *&head, string ma){
     if(head == NULL) return;
 
@@ -144,9 +144,9 @@ void deleteByMa(Node *&head, string ma){
     }
 }
 
-// ================= KH�C =================
+// ===== KHÁC =====
 
-// In danh s�ch
+// In danh sách
 void duyet(Node *head){
     while(head != NULL){
         cout << head->maHS << " - " << head->diem << endl;
@@ -154,7 +154,7 @@ void duyet(Node *head){
     }
 }
 
-// �?m di?m th?p nh?t
+// Đếm điểm thấp nhất
 int countMin(Node *head){
     if(head == NULL) return 0;
 
@@ -180,7 +180,7 @@ int countMin(Node *head){
     return dem;
 }
 
-// X�a di?m < 5
+// Xóa điểm < 5
 void deleteLessThan5(Node *&head){
     while(head != NULL && head->diem < 5){
         popFront(head);
@@ -198,17 +198,17 @@ void deleteLessThan5(Node *&head){
     }
 }
 
-// ================= MAIN =================
+// ===== MAIN =====
 
 int main(){
     Node *head = NULL;
 
-    // T?o 5 sinh vi�n
-    pushBack(head, "HS01", 8.5);
-    pushBack(head, "HS02", 4.0);
-    pushBack(head, "HS03", 6.5);
-    pushBack(head, "HS04", 4.0);
-    pushBack(head, "HS05", 9.0);
+    // Tạo danh sách (THÊM ĐẦU)
+    pushFront(head, "HS01", 8.5);
+    pushFront(head, "HS02", 4.0);
+    pushFront(head, "HS03", 6.5);
+    pushFront(head, "HS04", 4.0);
+    pushFront(head, "HS05", 9.0);
 
     cout << "Danh sach ban dau:\n";
     duyet(head);
@@ -220,12 +220,14 @@ int main(){
     cout << "\nSau khi xoa diem < 5:\n";
     duyet(head);
 
-    // Test th�m/x�a
-    pushFront(head, "HS00", 7.0);
-    insert(head, 2, "HS06", 5.5);
+    // ===== TEST thêm/xóa chuẩn DSLK =====
+    pushBack(head, "HS06", 7.0);
+    insert(head, 2, "HS07", 5.5);
+    popFront(head);
     popBack(head);
+    erase(head, 2);
 
-    cout << "\nSau khi test them/xoa:\n";
+    cout << "\nSau khi test them/xoa day du:\n";
     duyet(head);
 
     return 0;
